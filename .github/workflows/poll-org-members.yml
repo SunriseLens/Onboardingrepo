@@ -1,0 +1,29 @@
+name: Poll Org Members
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'   # Run every 10 minutes
+  workflow_dispatch:         # Allow manual run
+
+jobs:
+  check-new-members:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run check_members.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          ORG_NAME: your-org-name-here         # 👈 replace
+          REPO_NAME: org-onboarding            # 👈 or your target repo
+        run: python .github/scripts/check_members.py
