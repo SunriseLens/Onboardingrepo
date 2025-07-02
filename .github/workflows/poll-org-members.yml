@@ -24,6 +24,6 @@ jobs:
       - name: Run check_members.py
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          ORG_NAME:  SunriseLens    # 👈 replace
-          REPO_NAME: Onboardingrepo # 👈 or your target repo
+          ORG_NAME:  SunriseLens    # ORg
+          REPO_NAME: Onboardingrepo #  target repo
         run: python .github/scripts/check_members.py
