@@ -29,12 +29,13 @@ jobs:
         run: python .github/scripts/check_members.py
 
       - name: Commit updated members.json
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .github/scripts/members.json
           git commit -m "Update members list [bot]" || echo "No changes to commit"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          git push https://x-access-token:${PERSONAL_TOKEN}@github.com/SunriseLens/Onboardingrepo.git
+  
 
